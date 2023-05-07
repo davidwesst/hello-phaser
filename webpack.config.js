@@ -1,8 +1,7 @@
 const path = require("path");
 
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Webpack = require("webpack");
-const WebpackDevServer = require("webpack-dev-server");
 
 const isProduction = process.env.NODE_ENV === "production";
 const config = {
@@ -39,6 +38,14 @@ const config = {
             template: "src/index.html",
             filename: "index.html",
             inject: true
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: "src/assets",
+                    to: "assets"
+                }
+            ]
         })
     ]
 }
